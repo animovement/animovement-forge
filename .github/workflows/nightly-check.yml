@@ -14,7 +14,7 @@ jobs:
       has_updates: ${{ steps.update.outputs.has_updates }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check R-Universe for new versions
         id: update
