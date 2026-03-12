@@ -12,10 +12,10 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install rattler-build
-        uses: prefix-dev/rattler-build-action@v0.2.34
+        uses: prefix-dev/rattler-build-action@v0.2.36
         with:
           rattler-build-version: latest
 
