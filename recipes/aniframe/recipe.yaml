@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  version: "0.4.1"
+
+package:
+  name: r-aniframe
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/aniframe_${{ version }}.tar.gz
+  sha256: 0f079ebc8bf81bf49c85ad810a0dc36199ef2159617505cb441933e30e846276
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-cli
+    - r-dplyr
+    - r-rlang
+    - r-pillar
+    - r-anytime
+
+tests:
+  - script:
+      - Rscript -e "library(aniframe)"
+
+about:
+  homepage: https://github.com/animovement/aniframe
+  summary: An R package providing core data structures for movement data
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

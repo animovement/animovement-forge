@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  version: "0.1.1"
+
+package:
+  name: r-anicheck
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/anicheck_${{ version }}.tar.gz
+  sha256: 6b54059ef7bc27d392461fb57c33c2a9a2e01298b3ef3dba5231c18c887c4abb
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-aniframe
+    - r-cli
+    - r-dplyr
+    - r-rlang
+
+tests:
+  - script:
+      - Rscript -e "library(anicheck)"
+
+about:
+  homepage: https://github.com/animovement/anicheck
+  summary: An R package for diagnosing movement data quality
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

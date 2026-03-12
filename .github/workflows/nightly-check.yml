@@ -1,0 +1,41 @@
+name: Nightly Check
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # 02:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      has_updates: ${{ steps.update.outputs.has_updates }}
+      updated_packages: ${{ steps.update.outputs.updated_packages }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check R-Universe for new versions
+        id: update
+        run: python scripts/update-recipes.py
+
+      - name: Commit recipe updates
+        if: steps.update.outputs.has_updates == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add recipes/
+          git commit -m "chore: update recipes from R-Universe [skip ci]"
+          git push
+
+  build:
+    needs: check-and-update
+    if: needs.check-and-update.outputs.has_updates == 'true'
+    uses: ./.github/workflows/build-and-upload.yml
+    with:
+      packages: ${{ needs.check-and-update.outputs.updated_packages }}
+    permissions:
+      id-token: write
+      contents: read

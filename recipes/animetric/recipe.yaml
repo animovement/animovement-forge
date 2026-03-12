@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  version: "0.3.2"
+
+package:
+  name: r-animetric
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/animetric_${{ version }}.tar.gz
+  sha256: 80f865c8774dd53b03f8a966d117e7bf8ea91fc08f563c11056141b552abbbb5
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-aniframe
+    - r-anispace
+    - r-cli
+    - r-dplyr
+    - r-purrr
+    - r-rlang
+
+tests:
+  - script:
+      - Rscript -e "library(animetric)"
+
+about:
+  homepage: https://github.com/animovement/animetric
+  summary: An R package for calculating movement-based metrics
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

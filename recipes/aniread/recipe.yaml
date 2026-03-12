@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  version: "0.3.1"
+
+package:
+  name: r-aniread
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/aniread_${{ version }}.tar.gz
+  sha256: b7acd6fa82ea5b64aca135366fbc1e2901576aa406a80458ff899559cb726227
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-aniframe
+    - r-cli
+    - r-dplyr
+    - r-janitor
+    - r-rlang
+    - r-stringr
+    - r-tidyr
+    - r-tidyselect
+    - r-vroom
+
+tests:
+  - script:
+      - Rscript -e "library(aniread)"
+
+about:
+  homepage: https://github.com/animovement/aniread
+  summary: An R package for reading and writing movement data
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

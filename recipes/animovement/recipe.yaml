@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  version: "0.7.3"
+
+package:
+  name: r-animovement
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/animovement_${{ version }}.tar.gz
+  sha256: c1c0b393e7f442803855ded09c6e653263f0df2e141cc947f181d203ed10bd84
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-aniframe
+    - r-aniread
+    - r-anispace
+    - r-aniprocess
+    - r-anicheck
+    - r-animetric
+    - r-anivis
+    - r-cli
+
+tests:
+  - script:
+      - Rscript -e "library(animovement)"
+
+about:
+  homepage: https://github.com/animovement/animovement
+  summary: An R toolbox for analysing movement across space and time
+  license: GPL-3.0-only
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

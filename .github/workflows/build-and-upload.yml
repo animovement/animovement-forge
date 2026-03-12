@@ -1,0 +1,60 @@
+name: Build and Upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "Space-separated package names to build (empty = all)"
+        required: false
+        default: ""
+  workflow_call:
+    inputs:
+      packages:
+        type: string
+        required: false
+        default: ""
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for prefix.dev trusted publishing
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install rattler-build
+        uses: prefix-dev/rattler-build-action@v0.2.34
+        with:
+          rattler-build-version: latest
+
+      - name: Determine packages to build
+        id: pkgs
+        run: |
+          if [ -z "${{ inputs.packages }}" ]; then
+            packages=$(ls recipes/ | tr '\n' ' ')
+          else
+            packages="${{ inputs.packages }}"
+          fi
+          echo "list=$packages" >> "$GITHUB_OUTPUT"
+
+      - name: Build packages
+        run: |
+          mkdir -p output
+          for pkg in ${{ steps.pkgs.outputs.list }}; do
+            echo "::group::Building $pkg"
+            rattler-build build \
+              --recipe "recipes/$pkg" \
+              -c https://prefix.dev/animovement \
+              -c conda-forge \
+              --output-dir output
+            echo "::endgroup::"
+          done
+
+      - name: Upload to prefix.dev
+        run: |
+          find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \) | while read pkg; do
+            echo "Uploading $pkg ..."
+            rattler-build upload prefix --channel animovement "$pkg"
+          done

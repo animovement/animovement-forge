@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  version: "0.1.0"
+
+package:
+  name: r-anivis
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/anivis_${{ version }}.tar.gz
+  sha256: 53544408c4ce3dd5bf82348deec0399a15fc543af26f57e260d7cd432142b80f
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+    - r-rlang
+    - r-ggplot2
+    - r-patchwork
+    - r-marquee
+
+tests:
+  - script:
+      - Rscript -e "library(anivis)"
+
+about:
+  homepage: https://github.com/animovement/anivis
+  summary: An R package for visualizing movement data and diagnostics
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol

@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  version: "0.1.2"
+
+package:
+  name: r-aniprocess
+  version: ${{ version }}
+
+source:
+  url: https://animovement.r-universe.dev/src/contrib/aniprocess_${{ version }}.tar.gz
+  sha256: 0e87626e69236c71a284f4f129efb4318bcee310492e4c0ac5c326772ba8b482
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --no-multiarch --with-keep.source .
+
+requirements:
+  host:
+    - r-base >=4.1.0
+  run:
+    - r-base >=4.1.0
+    - r-aniframe
+    - r-cli
+    - r-collapse
+    - r-dplyr
+    - r-rlang
+
+tests:
+  - script:
+      - Rscript -e "library(aniprocess)"
+
+about:
+  homepage: https://github.com/animovement/aniprocess
+  summary: An R package for signal processing and filtering of movement data
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - roaldarbol
