@@ -19,6 +19,11 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
+    - r-cli
+    - r-dplyr
+    - r-rlang
+    - r-pillar
+    - r-anytime
   run:
     - r-base >=4.1.0
     - r-cli

@@ -19,6 +19,10 @@ build:
 requirements:
   host:
     - r-base
+    - r-rlang
+    - r-ggplot2
+    - r-patchwork
+    - r-marquee
   run:
     - r-base
     - r-rlang

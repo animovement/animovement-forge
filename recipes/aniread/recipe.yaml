@@ -19,6 +19,15 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
+    - r-aniframe
+    - r-cli
+    - r-dplyr
+    - r-janitor
+    - r-rlang
+    - r-stringr
+    - r-tidyr
+    - r-tidyselect
+    - r-vroom
   run:
     - r-base >=4.1.0
     - r-aniframe

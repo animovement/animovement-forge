@@ -19,6 +19,12 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
+    - r-aniframe
+    - r-anispace
+    - r-cli
+    - r-dplyr
+    - r-purrr
+    - r-rlang
   run:
     - r-base >=4.1.0
     - r-aniframe
