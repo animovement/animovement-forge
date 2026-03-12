@@ -14,14 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install rattler-build
-        uses: prefix-dev/rattler-build-action@v0.2.34
-        with:
-          rattler-build-version: latest
+      - uses: prefix-dev/setup-pixi@v0.8.0
 
       - name: Build all packages
         run: |
-          rattler-build build \
+          pixi run rattler-build build \
             --recipe-dir recipes \
             -c https://prefix.dev/animovement \
             -c conda-forge \
@@ -31,5 +28,5 @@ jobs:
         run: |
           find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \) | while read pkg; do
             echo "Uploading $pkg ..."
-            rattler-build upload prefix --channel animovement "$pkg"
+            pixi run rattler-build upload prefix --channel animovement "$pkg"
           done
