@@ -41,7 +41,14 @@ Requires [pixi](https://pixi.sh).
 # Check for and apply version updates from R-Universe
 pixi run python scripts/update-recipes.py
 
-# Build a single package locally
+# Build all packages locally (rattler-build resolves order automatically)
+pixi run rattler-build build \
+  --recipe-dir recipes \
+  -c https://prefix.dev/animovement \
+  -c conda-forge \
+  --output-dir output
+
+# Build a single package
 pixi run rattler-build build \
   --recipe recipes/aniframe \
   -c https://prefix.dev/animovement \

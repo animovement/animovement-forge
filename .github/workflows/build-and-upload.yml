@@ -2,17 +2,7 @@ name: Build and Upload
 
 on:
   workflow_dispatch:
-    inputs:
-      packages:
-        description: "Space-separated package names to build (empty = all)"
-        required: false
-        default: ""
   workflow_call:
-    inputs:
-      packages:
-        type: string
-        required: false
-        default: ""
 
 jobs:
   build-and-upload:
@@ -29,28 +19,13 @@ jobs:
         with:
           rattler-build-version: latest
 
-      - name: Determine packages to build
-        id: pkgs
+      - name: Build all packages
         run: |
-          if [ -z "${{ inputs.packages }}" ]; then
-            packages=$(ls recipes/ | tr '\n' ' ')
-          else
-            packages="${{ inputs.packages }}"
-          fi
-          echo "list=$packages" >> "$GITHUB_OUTPUT"
-
-      - name: Build packages
-        run: |
-          mkdir -p output
-          for pkg in ${{ steps.pkgs.outputs.list }}; do
-            echo "::group::Building $pkg"
-            rattler-build build \
-              --recipe "recipes/$pkg" \
-              -c https://prefix.dev/animovement \
-              -c conda-forge \
-              --output-dir output
-            echo "::endgroup::"
-          done
+          rattler-build build \
+            --recipe-dir recipes \
+            -c https://prefix.dev/animovement \
+            -c conda-forge \
+            --output-dir output
 
       - name: Upload to prefix.dev
         run: |

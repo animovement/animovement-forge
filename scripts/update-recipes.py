@@ -79,7 +79,6 @@ def main() -> None:
     if "GITHUB_OUTPUT" in os.environ:
         with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             f.write(f"has_updates={'true' if updated else 'false'}\n")
-            f.write(f"updated_packages={' '.join(updated)}\n")
 
     if updated:
         print(f"\nUpdated: {', '.join(updated)}")
