@@ -31,7 +31,23 @@ jobs:
 
       - name: Upload to prefix.dev
         run: |
-          find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \) | while read pkg; do
+          # Every build produces all 8 packages, but only changed versions are
+          # new to the channel. Skip packages that already exist (HTTP 409)
+          # instead of failing the whole upload.
+          set +e
+          status=0
+          while IFS= read -r pkg; do
             echo "Uploading $pkg ..."
-            pixi run rattler-build upload prefix --channel animovement "$pkg"
-          done
+            out=$(pixi run rattler-build upload prefix --channel animovement "$pkg" 2>&1)
+            rc=$?
+            echo "$out"
+            if [ $rc -ne 0 ]; then
+              if echo "$out" | grep -q "already exists"; then
+                echo "  -> already on channel, skipping"
+              else
+                echo "  -> upload failed"
+                status=1
+              fi
+            fi
+          done < <(find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \))
+          exit $status
