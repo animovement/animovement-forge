@@ -18,6 +18,14 @@ UNIVERSE_URL = "https://animovement.r-universe.dev"
 RECIPES_DIR = Path(__file__).parent.parent / "recipes"
 
 
+def parse_version(v: str) -> tuple:
+    """Best-effort version key for ordering (handles plain X.Y.Z and suffixes)."""
+    return tuple(
+        (0, int(p)) if p.isdigit() else (1, p)
+        for p in re.split(r"[.\-_]", v)
+    )
+
+
 def get_universe_packages() -> dict[str, dict]:
     url = f"{UNIVERSE_URL}/api/packages?fields=Package,Version,RemoteSha,RemoteUrl"
     with urllib.request.urlopen(url) as r:
@@ -77,6 +85,14 @@ def main() -> None:
 
         if current_version == universe_version and current_rev == universe_rev:
             print(f"{pkg_name}: up to date ({current_version} @ {universe_rev[:10]})")
+        elif current_version and parse_version(current_version) > parse_version(universe_version):
+            # Recipe is pinned ahead of R-Universe (e.g. a version manually
+            # bumped straight from GitHub before R-Universe rebuilt it). Don't
+            # downgrade -- R-Universe will catch up and match on a later run.
+            print(
+                f"{pkg_name}: recipe ahead of R-Universe "
+                f"({current_version} > {universe_version}), leaving as-is"
+            )
         else:
             print(
                 f"{pkg_name}: {current_version} @ {(current_rev or '')[:10]} "
