@@ -15,7 +15,12 @@ source:
 build:
   number: 0
   noarch: generic
-  script: R CMD INSTALL --no-multiarch --with-keep.source .
+  script:
+    # Drop dev-only renv files from the git checkout; otherwise the
+    # project .Rprofile activates renv and hijacks the library path.
+    - rm -f .Rprofile renv.lock
+    - rm -rf renv
+    - R CMD INSTALL --no-multiarch --with-keep.source .
 
 requirements:
   host:
@@ -25,6 +30,7 @@ requirements:
     - r-rlang
     - r-pillar
     - r-anytime
+    - r-lifecycle
   run:
     - r-base >=4.1.0
     - r-cli
@@ -32,6 +38,7 @@ requirements:
     - r-rlang
     - r-pillar
     - r-anytime
+    - r-lifecycle
 
 tests:
   - script:
