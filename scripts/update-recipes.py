@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-"""Check R-Universe for new package versions and update recipes accordingly."""
+"""Check R-Universe for new package versions and update recipes accordingly.
 
-import hashlib
+Recipes pin the upstream GitHub repo at the exact commit R-Universe built
+(`context.rev`). Pinning to an immutable commit -- rather than to a checksum of
+R-Universe's `src/contrib` tarball -- avoids spurious build failures: R-Universe
+regenerates those tarballs non-reproducibly, so a pinned sha256 goes stale within
+days even when the package version is unchanged. A git commit never drifts.
+"""
+
 import json
 import os
 import re
@@ -13,33 +19,22 @@ RECIPES_DIR = Path(__file__).parent.parent / "recipes"
 
 
 def get_universe_packages() -> dict[str, dict]:
-    url = f"{UNIVERSE_URL}/api/packages?fields=Package,Version"
+    url = f"{UNIVERSE_URL}/api/packages?fields=Package,Version,RemoteSha,RemoteUrl"
     with urllib.request.urlopen(url) as r:
         data = json.loads(r.read())
     return {pkg["Package"].lower(): pkg for pkg in data}
 
 
-def get_recipe_version(recipe_path: Path) -> str | None:
+def get_recipe_field(recipe_path: Path, key: str) -> str | None:
+    """Read a value from the recipe's `context` block (e.g. version, rev)."""
     for line in recipe_path.read_text().splitlines():
         line = line.strip()
-        if line.startswith("version:") and "${{" not in line:
+        if line.startswith(f"{key}:") and "${{" not in line:
             return line.split(":", 1)[1].strip().strip('"')
     return None
 
 
-def compute_sha256(url: str) -> str:
-    digest = hashlib.sha256()
-    with urllib.request.urlopen(url) as r:
-        while chunk := r.read(8192):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def update_recipe(recipe_path: Path, package_name: str, new_version: str) -> None:
-    tarball_url = f"{UNIVERSE_URL}/src/contrib/{package_name}_{new_version}.tar.gz"
-    print(f"  Fetching {tarball_url} ...")
-    new_sha256 = compute_sha256(tarball_url)
-
+def update_recipe(recipe_path: Path, new_version: str, new_rev: str) -> None:
     content = recipe_path.read_text()
     content = re.sub(
         r'(version:\s*")[^"]+(")',
@@ -47,7 +42,12 @@ def update_recipe(recipe_path: Path, package_name: str, new_version: str) -> Non
         content,
         count=1,
     )
-    content = re.sub(r'(sha256:\s*)\S+', rf'\g<1>{new_sha256}', content)
+    content = re.sub(
+        r'(rev:\s*)[0-9a-f]{7,40}\b',
+        rf'\g<1>{new_rev}',
+        content,
+        count=1,
+    )
     recipe_path.write_text(content)
 
 
@@ -65,15 +65,24 @@ def main() -> None:
             print(f"WARNING: {pkg_name} not found in R-Universe, skipping")
             continue
 
-        universe_version = packages[pkg_name]["Version"]
-        original_name = packages[pkg_name]["Package"]
-        current_version = get_recipe_version(recipe_path)
+        info = packages[pkg_name]
+        universe_version = info["Version"]
+        universe_rev = info.get("RemoteSha")
+        if not universe_rev:
+            print(f"WARNING: {pkg_name} has no RemoteSha in R-Universe, skipping")
+            continue
 
-        if current_version == universe_version:
-            print(f"{pkg_name}: up to date ({current_version})")
+        current_version = get_recipe_field(recipe_path, "version")
+        current_rev = get_recipe_field(recipe_path, "rev")
+
+        if current_version == universe_version and current_rev == universe_rev:
+            print(f"{pkg_name}: up to date ({current_version} @ {universe_rev[:10]})")
         else:
-            print(f"{pkg_name}: {current_version} -> {universe_version}")
-            update_recipe(recipe_path, original_name, universe_version)
+            print(
+                f"{pkg_name}: {current_version} @ {(current_rev or '')[:10]} "
+                f"-> {universe_version} @ {universe_rev[:10]}"
+            )
+            update_recipe(recipe_path, universe_version, universe_rev)
             updated.append(pkg_name)
 
     if "GITHUB_OUTPUT" in os.environ:

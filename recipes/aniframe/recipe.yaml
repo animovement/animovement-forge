@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.5.0"
+  rev: f10ffed53057a00be0ddd69013f5b7b641c991be
 
 package:
   name: r-aniframe
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/aniframe_${{ version }}.tar.gz
-  sha256: 88c0506c58dd1f4134a650919f6501e7c7623c024aad72234fafe0231bd218d4
+  git: https://github.com/animovement/aniframe.git
+  rev: ${{ rev }}
 
 build:
   number: 0

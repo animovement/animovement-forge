@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.2.0"
+  rev: dd8a6be17188c4da248dcffd732ec2d62d7b9343
 
 package:
   name: r-aniprocess
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/aniprocess_${{ version }}.tar.gz
-  sha256: ccb1135266668562ac127ddc045b0b0915849f249c3d91d908a8b8f896b11f5c
+  git: https://github.com/animovement/aniprocess.git
+  rev: ${{ rev }}
 
 build:
   number: 0

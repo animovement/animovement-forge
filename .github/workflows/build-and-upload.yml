@@ -12,7 +12,12 @@ jobs:
       contents: read
 
     steps:
+      # Check out the branch tip (not the triggering SHA) so that when this
+      # workflow is called by Nightly Check right after it pushes a version
+      # bump, we build the freshly-committed recipe rather than the old one.
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: prefix-dev/setup-pixi@v0.9.6
 

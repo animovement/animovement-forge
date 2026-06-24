@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.7.3"
+  rev: 47b962369952f1f7fa5f90904eef85e65f82a7fb
 
 package:
   name: r-animovement
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/animovement_${{ version }}.tar.gz
-  sha256: c1c0b393e7f442803855ded09c6e653263f0df2e141cc947f181d203ed10bd84
+  git: https://github.com/animovement/animovement.git
+  rev: ${{ rev }}
 
 build:
   number: 0

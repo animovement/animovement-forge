@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.4.1"
+  rev: 457fccf4d43afbcce329f2c55e48ce1a15d10df6
 
 package:
   name: r-aniread
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/aniread_${{ version }}.tar.gz
-  sha256: be1ed3f9f128bcc9443d17c7f91f81e7667d0e6b2bed01b66a7b5a11e24dc8be
+  git: https://github.com/animovement/aniread.git
+  rev: ${{ rev }}
 
 build:
   number: 0

@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.3.2"
+  rev: 288036ea63fbced419e3b0883fba4ccfbee6b3f5
 
 package:
   name: r-animetric
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/animetric_${{ version }}.tar.gz
-  sha256: 80f865c8774dd53b03f8a966d117e7bf8ea91fc08f563c11056141b552abbbb5
+  git: https://github.com/animovement/animetric.git
+  rev: ${{ rev }}
 
 build:
   number: 0

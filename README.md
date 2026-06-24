@@ -29,7 +29,7 @@ pixi add --channel https://prefix.dev/animovement --channel conda-forge r-anifra
 
 ## How it works
 
-Recipes are sourced from [animovement.r-universe.dev](https://animovement.r-universe.dev). A nightly CI job checks R-Universe for new package versions, updates the pinned version and SHA256 in the relevant `recipe.yaml` files, commits the changes, and triggers a build and upload to the prefix.dev channel.
+Versions are tracked via [animovement.r-universe.dev](https://animovement.r-universe.dev), but each recipe builds from the upstream GitHub repo pinned to the exact commit R-Universe built (`context.rev`). Pinning an immutable commit avoids spurious build failures: R-Universe regenerates its `src/contrib` tarballs non-reproducibly, so a pinned `sha256` would go stale within days even at an unchanged version. A nightly CI job checks R-Universe for new versions/commits, updates the pinned `version` and `rev` in the relevant `recipe.yaml` files, commits the changes, and triggers a build and upload to the prefix.dev channel.
 
 To trigger a manual build, use the **Build and Upload** workflow dispatch on GitHub Actions.
 

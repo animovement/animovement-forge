@@ -2,14 +2,15 @@ schema_version: 1
 
 context:
   version: "0.1.1"
+  rev: eef5c38b89acccc6d855031e1984cdb86dcb7a2f
 
 package:
   name: r-anicheck
   version: ${{ version }}
 
 source:
-  url: https://animovement.r-universe.dev/src/contrib/anicheck_${{ version }}.tar.gz
-  sha256: 6b54059ef7bc27d392461fb57c33c2a9a2e01298b3ef3dba5231c18c887c4abb
+  git: https://github.com/animovement/anicheck.git
+  rev: ${{ rev }}
 
 build:
   number: 0

@@ -36,3 +36,25 @@ jobs:
     permissions:
       id-token: write
       contents: read
+
+  notify-failure:
+    needs: [check-and-update, build]
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update a failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Nightly recipe update/build failed"
+          body="The [nightly run]($RUN_URL) failed. Recipes may have been bumped without a successful build/upload to prefix.dev — check the logs."
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search "$title in:title" --json number -q '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi
