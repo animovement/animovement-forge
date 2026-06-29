@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.1.1"
+  version: "0.2.0"
   rev: eef5c38b89acccc6d855031e1984cdb86dcb7a2f
 
 package:
