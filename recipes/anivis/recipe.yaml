@@ -13,7 +13,7 @@ source:
   rev: ${{ rev }}
 
 build:
-  number: 0
+  number: 1
   noarch: generic
   script:
     # Drop dev-only renv files from the git checkout; otherwise the
