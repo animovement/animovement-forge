@@ -27,13 +27,11 @@ requirements:
     - r-base >=4.1.0
     - r-aniframe
     - r-cli
-    - r-dplyr
     - r-rlang
   run:
     - r-base >=4.1.0
     - r-aniframe
     - r-cli
-    - r-dplyr
     - r-rlang
 
 tests:

@@ -29,12 +29,18 @@ requirements:
     - r-ggplot2
     - r-patchwork
     - r-marquee
+    - r-hms
+    - r-cli
+    - r-aniframe >=0.6.0
   run:
     - r-base
     - r-rlang
     - r-ggplot2
     - r-patchwork
     - r-marquee
+    - r-hms
+    - r-cli
+    - r-aniframe >=0.6.0
 
 tests:
   - script:
