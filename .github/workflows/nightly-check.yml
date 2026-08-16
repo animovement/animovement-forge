@@ -36,6 +36,9 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    # Called workflows get no secrets by default, so PREFIX_API_KEY would be
+    # empty here without this and only the OIDC path would be available.
+    secrets: inherit
 
   notify-failure:
     needs: [check-and-update, build]
