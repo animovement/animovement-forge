@@ -7,6 +7,10 @@ on:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
+    # prefix.dev's trusted publishers are scoped to this environment, so the
+    # job has to opt in for the OIDC token to carry the `environment` claim.
+    # Without it the token matches no publisher and the mint request 401s.
+    environment: prefix
     permissions:
       id-token: write  # required for prefix.dev trusted publishing
       contents: read
