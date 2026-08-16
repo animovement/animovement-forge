@@ -30,24 +30,21 @@ jobs:
             --output-dir output
 
       - name: Upload to prefix.dev
+        env:
+          # Fallback for when trusted publishing (OIDC) is unavailable. Empty
+          # when the secret isn't configured, in which case we unset it below
+          # so the OIDC path is still tried.
+          PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
         run: |
+          # rattler-build reads PREFIX_API_KEY via clap; an empty value could
+          # read as "key provided" and short-circuit trusted publishing.
+          [ -n "$PREFIX_API_KEY" ] || unset PREFIX_API_KEY
           # Every build produces all 8 packages, but only changed versions are
-          # new to the channel. Skip packages that already exist (HTTP 409)
-          # instead of failing the whole upload.
-          set +e
-          status=0
-          while IFS= read -r pkg; do
-            echo "Uploading $pkg ..."
-            out=$(pixi run rattler-build upload prefix --channel animovement "$pkg" 2>&1)
-            rc=$?
-            echo "$out"
-            if [ $rc -ne 0 ]; then
-              if echo "$out" | grep -q "already exists"; then
-                echo "  -> already on channel, skipping"
-              else
-                echo "  -> upload failed"
-                status=1
-              fi
-            fi
-          done < <(find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \))
-          exit $status
+          # new to the channel — --skip-existing ignores the rest. Unlike the
+          # old grep-for-"already exists" loop, this still fails the job on
+          # real errors such as an auth failure.
+          find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \) -print0 \
+            | xargs -0 --no-run-if-empty \
+                pixi run rattler-build upload prefix \
+                  --channel animovement \
+                  --skip-existing

@@ -5,5 +5,7 @@ name = "animovement-forge"
 platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 
 [dependencies]
-rattler-build = "*"
+# Pinned, with pixi.lock committed, so CI can't silently drift the build
+# toolchain between nightly runs the way it did from 0.67 to 0.73.
+rattler-build = "0.73.*"
 python = ">=3.11"
