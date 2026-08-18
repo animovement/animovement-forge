@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.6.0.9001"
-  rev: 40708e71aecf2345da6a0e3f37e0d7749c522b30
+  version: "0.7.0"
+  rev: 5aa7713399647df766b481ce4ac4e16e691db064
 
 package:
   name: r-aniframe
