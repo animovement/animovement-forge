@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.2.0"
-  rev: e199726371d0cbbcc45f79dc56fd5da3df47e428
+  rev: bb1cc618c5eb4f3a98bb4337e390dc45ae542d23
 
 package:
   name: r-anispace
