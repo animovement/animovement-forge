@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.2.0"
-  rev: dd72dee4c525975b528bea2ea4853fa0900a3e94
+  rev: 4ea16096128c96452eca11daa39c298a802569a9
 
 package:
   name: r-anivis
