@@ -9,7 +9,7 @@ package:
   version: ${{ version }}
 
 source:
-  git: https://github.com/animovement/aniframe.git
+  git: https://github.com/animovement/anicore.git
   rev: ${{ rev }}
 
 build:
@@ -42,10 +42,10 @@ requirements:
 
 tests:
   - script:
-      - Rscript -e "library(aniframe)"
+      - Rscript -e "library(anicore)"
 
 about:
-  homepage: https://github.com/animovement/aniframe
+  homepage: https://github.com/animovement/anicore
   summary: An R package providing core data structures for movement data
   license: MIT
   license_file: LICENSE
