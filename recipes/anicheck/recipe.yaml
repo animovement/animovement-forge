@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.2.0"
-  rev: 2d7928529db2ae9cddaeed25a4797096c5b335cf
+  version: "0.2.0.9000"
+  rev: 8c0d3f0572da308c137adbaa262f5a2d17b52021
 
 package:
   name: r-anicheck
