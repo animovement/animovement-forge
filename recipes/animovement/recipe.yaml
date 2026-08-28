@@ -52,7 +52,7 @@ about:
   homepage: https://github.com/animovement/animovement
   summary: An R toolbox for analysing movement across space and time
   license: GPL-3.0-only
-  license_file: LICENSE
+  license_file: LICENSE.md
 
 extra:
   recipe-maintainers:
