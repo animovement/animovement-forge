@@ -1,11 +1,11 @@
 schema_version: 1
 
 context:
-  version: "0.7.0.9000"
-  rev: a9042d92caa87c1866962531c6f7810a23049cc7
+  version: "0.8.0.9000"
+  rev: ce65bcc17db503072b354c3d091a6de11c3f0c7e
 
 package:
-  name: r-aniframe
+  name: r-anicore
   version: ${{ version }}
 
 source:

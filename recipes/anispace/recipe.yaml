@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.2.0.9000"
-  rev: c143309448081a0514d9f0dde33d39948db378f4
+  version: "0.3.0"
+  rev: 5cad26adf99ac4ed4cc8e6121143c8864b369f01
 
 package:
   name: r-anispace
@@ -25,13 +25,13 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-dplyr
     - r-rlang
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-dplyr
     - r-rlang
