@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.2.0.9000"
-  rev: 8c0d3f0572da308c137adbaa262f5a2d17b52021
+  version: "0.3.0"
+  rev: ff95a669636798247fbca4fb3c020d55f2a7b917
 
 package:
   name: r-anicheck
@@ -25,12 +25,12 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-rlang
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-rlang
 

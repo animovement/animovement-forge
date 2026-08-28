@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.2.0.9000"
-  rev: 799bf371ea4f8295e0ca7290aef57481335031a8
+  version: "0.2.1"
+  rev: 880287f69ed3a41b0fcebb142cd2c790bd97fb6a
 
 package:
   name: r-anivis
@@ -31,7 +31,7 @@ requirements:
     - r-marquee
     - r-hms
     - r-cli
-    - r-aniframe >=0.6.0
+    - r-anicore >=0.8.0
   run:
     - r-base
     - r-rlang
@@ -40,7 +40,7 @@ requirements:
     - r-marquee
     - r-hms
     - r-cli
-    - r-aniframe >=0.6.0
+    - r-anicore >=0.8.0
 
 tests:
   - script:

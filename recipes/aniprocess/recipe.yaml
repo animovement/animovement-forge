@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.4.0.9000"
-  rev: 1fdace3e52543aab4afa7b5a9b7b1bdd5fc4ad67
+  version: "0.5.0"
+  rev: 4ff20955eba7b2cd6eadf8c58c00b21052a58166
 
 package:
   name: r-aniprocess
@@ -25,18 +25,22 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
-    - r-data.table
-    - r-dplyr
+    - r-data.table >=1.18.0
+    - r-dplyr >=1.1.0
+    - r-lifecycle
     - r-rlang
+    - r-tidyselect
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
-    - r-data.table
-    - r-dplyr
+    - r-data.table >=1.18.0
+    - r-dplyr >=1.1.0
+    - r-lifecycle
     - r-rlang
+    - r-tidyselect
 
 tests:
   - script:

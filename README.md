@@ -11,7 +11,7 @@ pixi add --channel https://prefix.dev/animovement --channel conda-forge r-animov
 Or to install individual packages:
 
 ```bash
-pixi add --channel https://prefix.dev/animovement --channel conda-forge r-aniframe
+pixi add --channel https://prefix.dev/animovement --channel conda-forge r-anicore
 ```
 
 ## Packages
@@ -19,7 +19,7 @@ pixi add --channel https://prefix.dev/animovement --channel conda-forge r-anifra
 | Package | Description |
 | --- | --- |
 | [r-animovement](recipes/animovement/recipe.yaml) | Toolbox for analysing movement across space and time |
-| [r-aniframe](recipes/aniframe/recipe.yaml) | Core data structures for movement data |
+| [r-anicore](recipes/anicore/recipe.yaml) | Core data structures for movement data |
 | [r-aniread](recipes/aniread/recipe.yaml) | Reading and writing movement data |
 | [r-aniprocess](recipes/aniprocess/recipe.yaml) | Signal processing and filtering of movement data |
 | [r-anispace](recipes/anispace/recipe.yaml) | Spatial transformation methods for movement data |
@@ -50,7 +50,7 @@ pixi run rattler-build build \
 
 # Build a single package
 pixi run rattler-build build \
-  --recipe recipes/aniframe \
+  --recipe recipes/anicore \
   -c https://prefix.dev/animovement \
   -c conda-forge \
   --output-dir output

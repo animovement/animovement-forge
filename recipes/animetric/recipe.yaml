@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.4.0"
-  rev: f969e51ac3a6e9738289f440e54dd0b3c95d9ba8
+  version: "0.5.0"
+  rev: 148c6f57fe66d7e3d2467ca54448c71b2aa17768
 
 package:
   name: r-animetric
@@ -25,7 +25,7 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-anispace
     - r-cli
     - r-dplyr
@@ -33,7 +33,7 @@ requirements:
     - r-rlang
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-anispace
     - r-cli
     - r-dplyr

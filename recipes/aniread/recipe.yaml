@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.6.0.9000"
-  rev: 18692cb4b1fe4b88fc17a97c28b1a2a62f1efbad
+  version: "0.7.0"
+  rev: bf6f9de91412275308c5c425b2013d542e6897e1
 
 package:
   name: r-aniread
@@ -25,7 +25,7 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-dplyr
     - r-janitor
@@ -36,7 +36,7 @@ requirements:
     - r-vroom
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-cli
     - r-dplyr
     - r-janitor

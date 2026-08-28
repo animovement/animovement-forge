@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: "0.7.4.9000"
-  rev: 5f14136b1eced6481a00d44d120af800002ce545
+  version: "0.8.0"
+  rev: c911640295367c8cce764f3cc51ff7e950e31d66
 
 package:
   name: r-animovement
@@ -25,7 +25,7 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-aniread
     - r-anispace
     - r-aniprocess
@@ -35,7 +35,7 @@ requirements:
     - r-cli
   run:
     - r-base >=4.1.0
-    - r-aniframe
+    - r-anicore >=0.8.0
     - r-aniread
     - r-anispace
     - r-aniprocess
