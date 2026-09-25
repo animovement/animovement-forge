@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.7.0.9003"
-  rev: 6e4c70d3173fd207943eb52b8d54f7b12f2f2369
+  rev: 8b3cf42a68e82e89e8872a6f64863ce6a05fd75c
 
 package:
   name: r-aniread
