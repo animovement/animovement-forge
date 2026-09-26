@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.8.0.9003"
-  rev: 646e113f00223c02b76b2fed43bad8e5ff3dbce7
+  rev: ddd0d2b3cf407994d0cb12133a921b664fc0fa6f
 
 package:
   name: r-anicore
