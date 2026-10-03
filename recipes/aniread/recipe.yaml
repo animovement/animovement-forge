@@ -27,6 +27,7 @@ requirements:
     - r-base >=4.1.0
     - r-anicore >=0.8.0
     - r-cli
+    - r-lifecycle
     - r-dplyr
     - r-janitor
     - r-rlang
@@ -38,6 +39,7 @@ requirements:
     - r-base >=4.1.0
     - r-anicore >=0.8.0
     - r-cli
+    - r-lifecycle
     - r-dplyr
     - r-janitor
     - r-rlang
