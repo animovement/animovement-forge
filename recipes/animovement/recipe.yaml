@@ -33,6 +33,7 @@ requirements:
     - r-animetric
     - r-anivis
     - r-cli
+    - r-lifecycle
   run:
     - r-base >=4.1.0
     - r-anicore >=0.8.0
@@ -43,6 +44,7 @@ requirements:
     - r-animetric
     - r-anivis
     - r-cli
+    - r-lifecycle
 
 tests:
   - script:

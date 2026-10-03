@@ -31,6 +31,7 @@ requirements:
     - r-marquee
     - r-hms
     - r-cli
+    - r-lifecycle
     - r-anicore >=0.8.0
   run:
     - r-base
@@ -40,6 +41,7 @@ requirements:
     - r-marquee
     - r-hms
     - r-cli
+    - r-lifecycle
     - r-anicore >=0.8.0
 
 tests:
