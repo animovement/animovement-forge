@@ -29,7 +29,8 @@ requirements:
     - r-anispace
     - r-cli
     - r-data.table
-    - r-dplyr
+    - r-dplyr >=1.1.0
+    - r-lifecycle
     - r-purrr
     - r-rlang
   run:
@@ -38,7 +39,8 @@ requirements:
     - r-anispace
     - r-cli
     - r-data.table
-    - r-dplyr
+    - r-dplyr >=1.1.0
+    - r-lifecycle
     - r-purrr
     - r-rlang
 
