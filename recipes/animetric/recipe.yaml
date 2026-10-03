@@ -28,6 +28,7 @@ requirements:
     - r-anicore >=0.8.0
     - r-anispace
     - r-cli
+    - r-data.table
     - r-dplyr
     - r-purrr
     - r-rlang
@@ -36,6 +37,7 @@ requirements:
     - r-anicore >=0.8.0
     - r-anispace
     - r-cli
+    - r-data.table
     - r-dplyr
     - r-purrr
     - r-rlang
