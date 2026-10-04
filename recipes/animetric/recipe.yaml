@@ -25,8 +25,8 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-anicore >=0.8.0
-    - r-anispace
+    - r-anicore >=0.8.0.9004
+    - r-anispace >=0.3.0.9006
     - r-cli
     - r-data.table
     - r-dplyr >=1.1.0
@@ -35,8 +35,8 @@ requirements:
     - r-rlang
   run:
     - r-base >=4.1.0
-    - r-anicore >=0.8.0
-    - r-anispace
+    - r-anicore >=0.8.0.9004
+    - r-anispace >=0.3.0.9006
     - r-cli
     - r-data.table
     - r-dplyr >=1.1.0

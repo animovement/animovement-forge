@@ -26,23 +26,23 @@ requirements:
   host:
     - r-base
     - r-rlang
-    - r-ggplot2
+    - r-ggplot2 >=3.5.0
     - r-patchwork
     - r-marquee
     - r-hms
     - r-cli
     - r-lifecycle
-    - r-anicore >=0.8.0
+    - r-anicore >=0.8.0.9004
   run:
     - r-base
     - r-rlang
-    - r-ggplot2
+    - r-ggplot2 >=3.5.0
     - r-patchwork
     - r-marquee
     - r-hms
     - r-cli
     - r-lifecycle
-    - r-anicore >=0.8.0
+    - r-anicore >=0.8.0.9004
 
 tests:
   - script:
