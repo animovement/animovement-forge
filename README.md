@@ -14,6 +14,23 @@ Or to install individual packages:
 pixi add --channel https://prefix.dev/animovement --channel conda-forge r-anicore
 ```
 
+### Already have R installed?
+
+R also looks in your personal package library (`R_LIBS_USER`, such as
+`~/Library/R/x86_64/4.5/library` on macOS), and it looks there before the
+environment's own library. If that library holds packages built for the same R
+version, the environment's R can load those CRAN builds instead of its conda
+ones and crash. We've seen `tidyr` and `vroom` segfault on load this way. To
+keep a Pixi environment to its own packages, add this to `pixi.toml`:
+
+```toml
+[activation.env]
+R_LIBS_USER = "$CONDA_PREFIX/lib/R/library"
+```
+
+The optional packages some readers need come from conda too. For HDF5 files
+(SLEAP, DeepLabCut), add the bioconda channel and `bioconductor-rhdf5`.
+
 ## Packages
 
 | Package | Description |
