@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.5.0.9005"
-  rev: 04c7535e9dca57d12f9a38178e87b0edb6734ae6
+  rev: d7fd1b51239d8e716590ffa9ee1bbcf7f7e1ead2
 
 package:
   name: r-animetric
