@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.8.0.9002"
-  rev: fe380407d46afec47b5ef7c973cd158c95d65ada
+  rev: b422fbb2ae4e81da6cdb7702a5ebbd0863f19985
 
 package:
   name: r-animovement
