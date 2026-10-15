@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "0.5.0.9003"
-  rev: ab00899610e09f15cd3471cea7c9d9fa3560ebc8
+  rev: ccc9ad52a9a863f8a632b7c6c8034dce78ba3ff7
 
 package:
   name: r-aniprocess
