@@ -13,7 +13,7 @@ source:
   rev: ${{ rev }}
 
 build:
-  number: 0
+  number: 1
   noarch: generic
   script:
     # Drop dev-only renv files from the git checkout; otherwise the
@@ -25,25 +25,23 @@ build:
 requirements:
   host:
     - r-base >=4.1.0
-    - r-anicore >=0.8.0.9003
+    - r-anicore >=0.8.0.9009
     - r-cli
-    - r-lifecycle
     - r-dplyr
     - r-janitor
+    - r-lifecycle
     - r-rlang
-    - r-stringr
     - r-tidyr
     - r-tidyselect
     - r-vroom
   run:
     - r-base >=4.1.0
-    - r-anicore >=0.8.0.9003
+    - r-anicore >=0.8.0.9009
     - r-cli
-    - r-lifecycle
     - r-dplyr
     - r-janitor
+    - r-lifecycle
     - r-rlang
-    - r-stringr
     - r-tidyr
     - r-tidyselect
     - r-vroom
