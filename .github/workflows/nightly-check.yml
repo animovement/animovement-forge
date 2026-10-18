@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
     outputs:
-      has_updates: ${{ steps.update.outputs.has_updates }}
+      needs_build: ${{ steps.update.outputs.needs_build }}
 
     steps:
       - uses: actions/checkout@v7
@@ -31,7 +31,10 @@ jobs:
 
   build:
     needs: check-and-update
-    if: needs.check-and-update.outputs.has_updates == 'true'
+    # Keyed on the channel rather than on whether recipes changed tonight:
+    # the bump is committed before the build, so a failed build would
+    # otherwise never be retried and later runs would pass without building.
+    if: needs.check-and-update.outputs.needs_build == 'true'
     uses: ./.github/workflows/build-and-upload.yml
     permissions:
       id-token: write
