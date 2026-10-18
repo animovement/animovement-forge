@@ -13,7 +13,7 @@ source:
   rev: ${{ rev }}
 
 build:
-  number: 0
+  number: 1
   noarch: generic
   script:
     # Drop dev-only renv files from the git checkout; otherwise the
@@ -31,6 +31,7 @@ requirements:
     - r-dplyr >=1.1.0
     - r-lifecycle
     - r-rlang
+    - r-signal
     - r-tidyselect
   run:
     - r-base >=4.1.0
@@ -40,6 +41,7 @@ requirements:
     - r-dplyr >=1.1.0
     - r-lifecycle
     - r-rlang
+    - r-signal
     - r-tidyselect
 
 tests:
